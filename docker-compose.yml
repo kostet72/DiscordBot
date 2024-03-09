@@ -1,0 +1,11 @@
+services:
+  postgres:
+    container_name: jda
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: discordBot
+    ports:
+      - 5432:5432
