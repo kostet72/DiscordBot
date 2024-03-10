@@ -15,6 +15,7 @@ public class BotUser {
 
     private Long id;
     private String name;
+    private String lvl;
     private Integer experience;
     private Date registrationDate;
 }

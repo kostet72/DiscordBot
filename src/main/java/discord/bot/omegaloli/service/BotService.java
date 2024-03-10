@@ -30,7 +30,7 @@ public class BotService {
         jda.shutdown();
     }
 
-    public void registerListeners(Object listener) {
+    public void registerListeners(Object... listener) {
         jda.addEventListener(listener);
     }
 }

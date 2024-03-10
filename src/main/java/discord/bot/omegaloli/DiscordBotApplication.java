@@ -2,7 +2,9 @@ package discord.bot.omegaloli;
 
 import discord.bot.omegaloli.service.BotService;
 import discord.bot.omegaloli.service.BotUserService;
-import discord.bot.omegaloli.listener.member.MemberJoinsListener;
+import discord.bot.omegaloli.listener.rules.RulesUpdateListener;
+import discord.bot.omegaloli.listener.user.member.MemberJoinsListener;
+import discord.bot.omegaloli.listener.user.experience.UserExperienceListener;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,7 +31,9 @@ public class DiscordBotApplication implements CommandLineRunner {
 
 		bot.startBot();
 		bot.registerListeners(
-				new MemberJoinsListener(userService)
+				new MemberJoinsListener(userService),
+				new UserExperienceListener(userService),
+				new RulesUpdateListener()
 		);
 	}
 }

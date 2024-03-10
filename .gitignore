@@ -37,5 +37,5 @@ out/
 .vscode/
 
 ### Application config ###
-/src/main/recources/application.yml
-/src/test/recources/application.yml
+/src/main/resources/application.yml
+/src/test/resources/application.yml
