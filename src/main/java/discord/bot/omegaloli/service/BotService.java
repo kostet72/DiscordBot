@@ -1,6 +1,8 @@
 package discord.bot.omegaloli.service;
 
 import discord.bot.omegaloli.config.BotConfig;
+import discord.bot.omegaloli.command.util.CommandManager;
+import discord.bot.omegaloli.command.util.CommandInterface;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -9,6 +11,8 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +36,14 @@ public class BotService {
 
     public void registerListeners(Object... listener) {
         jda.addEventListener(listener);
+    }
+
+    public CommandManager registerCommands(List<CommandInterface> commands) {
+
+        CommandManager manager = new CommandManager();
+        for (CommandInterface command : commands)
+            manager.registerCommand(command);
+
+        return manager;
     }
 }
