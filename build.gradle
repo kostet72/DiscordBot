@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'discord.bot'
-version = '0.9'
+version = '1.0'
 
 java {
 	sourceCompatibility = '17'

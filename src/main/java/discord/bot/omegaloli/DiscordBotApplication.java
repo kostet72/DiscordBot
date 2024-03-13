@@ -8,6 +8,7 @@ import discord.bot.omegaloli.listener.user.member.MemberJoinsListener;
 import discord.bot.omegaloli.listener.user.experience.UserExperienceListener;
 
 import discord.bot.omegaloli.command.HelpCommand;
+import discord.bot.omegaloli.command.ProfileCommand;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -44,7 +45,8 @@ public class DiscordBotApplication implements CommandLineRunner {
 
 				bot.registerCommands(List.of(
 
-						new HelpCommand()
+						new HelpCommand(),
+						new ProfileCommand(userService)
 				))
 		);
 	}

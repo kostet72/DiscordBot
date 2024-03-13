@@ -23,15 +23,45 @@ public class BotUserService {
 
     private final R2dbcEntityTemplate template;
 
-    public Boolean findUser(Long userId) {
-        return template.exists(query(where("id").is(userId)), BotUser.class)
-                .flatMap(isExist -> {
+    public Boolean checkUserRegistry(Long userId, String name) {
 
-                    if (Boolean.TRUE.equals(isExist))
-                        return Mono.just(true);
+        if (userId != null) {
 
-                    else return Mono.just(false);
-                }).block();
+            return template.exists(query(where("id").is(userId)), BotUser.class)
+                    .flatMap(isExist -> {
+
+                        if (Boolean.TRUE.equals(isExist))
+                            return Mono.just(true);
+
+                        else return Mono.just(false);
+                    })
+                    .block();
+        }
+        else if (name != null) {
+
+            return template.exists(query(where("name").is(name)), BotUser.class)
+                    .flatMap(isExist -> {
+
+                        if (Boolean.TRUE.equals(isExist))
+                            return Mono.just(true);
+
+                        else return Mono.just(false);
+                    })
+                    .block();
+        }
+        else return false;
+    }
+
+    public BotUser getUserInfoById(Long userId) {
+        return template.selectOne(query(where("id").is(userId)), BotUser.class)
+                .switchIfEmpty(Mono.empty())
+                .block();
+    }
+
+    public BotUser getUserInfoByName(String name) {
+        return template.selectOne(query(where("name").is(name)), BotUser.class)
+                .switchIfEmpty(Mono.empty())
+                .block();
     }
 
     public void registerUser(User user) {
@@ -47,7 +77,7 @@ public class BotUserService {
                 .block();
     }
 
-    public Mono<String> updateExperienceAndSetLevel(Long userId) {
+    public String updateExperienceAndSetLevel(Long userId) {
 
         return template.selectOne(query(where("id").is(userId)), BotUser.class)
                 .flatMap(u -> {
@@ -66,6 +96,7 @@ public class BotUserService {
                             else return Mono.empty();
                         });
                 })
-                .switchIfEmpty(Mono.empty());
+                .switchIfEmpty(Mono.empty())
+                .block();
     }
 }

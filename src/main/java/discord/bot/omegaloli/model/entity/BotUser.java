@@ -3,7 +3,7 @@ package discord.bot.omegaloli.model.entity;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,5 +17,5 @@ public class BotUser {
     private String name;
     private String lvl;
     private Integer experience;
-    private Date registrationDate;
+    private LocalDateTime registrationDate;
 }
