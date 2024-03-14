@@ -1,9 +1,9 @@
-package discord.bot.omegaloli.command;
+package discord.bot.omegaloli.command.global;
 
 import discord.bot.omegaloli.constant.TextMessage;
 import discord.bot.omegaloli.model.entity.BotUser;
 import discord.bot.omegaloli.service.BotUserService;
-import discord.bot.omegaloli.command.util.CommandInterface;
+import discord.bot.omegaloli.command.CommandInterface;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;

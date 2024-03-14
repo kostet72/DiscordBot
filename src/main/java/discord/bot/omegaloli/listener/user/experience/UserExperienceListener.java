@@ -23,7 +23,7 @@ public class UserExperienceListener extends ListenerAdapter {
         MessageChannel channel = event.getGuild().getTextChannelById(ChannelId.GLOBAL_CHANNEL);
         int length = event.getMessage().getContentRaw().length();
 
-        String answer = userService.updateExperienceAndSetLevel(user.getIdLong());
+        String answer = userService.updateExperienceAndSetLevel(user.getIdLong(), event);
 
         if (!user.isBot() && channel != null && length >= 5 && answer != null)
             channel.sendMessage(user.getAsMention() + " достиг " + answer + "-го уровня!").queue();

@@ -1,8 +1,8 @@
 package discord.bot.omegaloli.service;
 
 import discord.bot.omegaloli.config.BotConfig;
-import discord.bot.omegaloli.command.util.CommandManager;
-import discord.bot.omegaloli.command.util.CommandInterface;
+import discord.bot.omegaloli.command.CommandManager;
+import discord.bot.omegaloli.command.CommandInterface;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;

@@ -1,4 +1,4 @@
-package discord.bot.omegaloli.command.util;
+package discord.bot.omegaloli.command;
 
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;

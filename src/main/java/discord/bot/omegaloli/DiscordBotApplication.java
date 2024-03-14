@@ -3,12 +3,14 @@ package discord.bot.omegaloli;
 import discord.bot.omegaloli.service.BotService;
 import discord.bot.omegaloli.service.BotUserService;
 
+import discord.bot.omegaloli.listener.command.ModalListener;
 import discord.bot.omegaloli.listener.rules.RulesUpdateListener;
 import discord.bot.omegaloli.listener.user.member.MemberJoinsListener;
 import discord.bot.omegaloli.listener.user.experience.UserExperienceListener;
 
-import discord.bot.omegaloli.command.HelpCommand;
-import discord.bot.omegaloli.command.ProfileCommand;
+import discord.bot.omegaloli.command.global.HelpCommand;
+import discord.bot.omegaloli.command.dev.ChangeLogCommand;
+import discord.bot.omegaloli.command.global.ProfileCommand;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -42,9 +44,16 @@ public class DiscordBotApplication implements CommandLineRunner {
 				new MemberJoinsListener(userService),
 				new UserExperienceListener(userService),
 				new RulesUpdateListener(),
+				new ModalListener(),
 
 				bot.registerCommands(List.of(
 
+						// ADMIN
+
+						// DEV
+						new ChangeLogCommand(),
+
+						// GLOBAL
 						new HelpCommand(),
 						new ProfileCommand(userService)
 				))
