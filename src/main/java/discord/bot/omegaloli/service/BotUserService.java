@@ -99,8 +99,7 @@ public class BotUserService {
                     String level = LVL.getLVLsRange(experience);
 
                     return template.update(query(where("id").is(userId)),
-                        update("experience", experience)
-                                .set("lvl", level), BotUser.class)
+                        update("experience", experience).set("lvl", level), BotUser.class)
                         .flatMap(lvl -> {
 
                             if (!u.getLvl().equals(level) && user != null &&

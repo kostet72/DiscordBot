@@ -9,6 +9,7 @@ import discord.bot.omegaloli.listener.user.member.MemberJoinsListener;
 import discord.bot.omegaloli.listener.user.experience.UserExperienceListener;
 
 import discord.bot.omegaloli.command.global.HelpCommand;
+import discord.bot.omegaloli.command.global.EventCommand;
 import discord.bot.omegaloli.command.dev.ChangeLogCommand;
 import discord.bot.omegaloli.command.global.ProfileCommand;
 
@@ -55,7 +56,8 @@ public class DiscordBotApplication implements CommandLineRunner {
 
 						// GLOBAL
 						new HelpCommand(),
-						new ProfileCommand(userService)
+						new ProfileCommand(userService),
+						new EventCommand()
 				))
 		);
 	}

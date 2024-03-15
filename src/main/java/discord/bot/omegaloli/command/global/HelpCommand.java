@@ -27,6 +27,6 @@ public class HelpCommand implements CommandInterface {
 
     @Override
     public void execute(SlashCommandInteraction event) {
-        event.reply(TextMessage.HELP_MESSAGE).queue();
+        event.reply(TextMessage.HELP_MESSAGE).setEphemeral(true).queue();
     }
 }

@@ -64,7 +64,7 @@ public class ProfileCommand implements CommandInterface {
             builder = embedBuilder(userService.getUserInfoByName(name.getAsString()));
             event.replyEmbeds(builder.build()).queue();
         }
-        else event.reply(TextMessage.USER_NOT_FOUND_MESSAGE).queue();
+        else event.reply(TextMessage.USER_NOT_FOUND_MESSAGE).setEphemeral(true).queue();
     }
 
     @NotNull

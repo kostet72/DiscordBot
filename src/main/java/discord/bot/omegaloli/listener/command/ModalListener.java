@@ -14,8 +14,39 @@ public class ModalListener extends ListenerAdapter {
     @Override
     public void onModalInteraction(@NotNull ModalInteractionEvent event) {
 
+        if (event.getModalId().equals("create-event"))
+            eventBuilder(event);
+
         if (event.getModalId().equals("create-change-log"))
             changeLogBuilder(event);
+    }
+
+    public void eventBuilder(ModalInteractionEvent event) {
+
+        ModalMapping nameValue = event.getValue("event-name-field");
+        ModalMapping dateValue = event.getValue("event-date");
+        ModalMapping descriptionValue = event.getValue("event-description-field");
+
+        String userName = event.getUser().getName();
+
+        if (nameValue != null && dateValue != null && descriptionValue != null) {
+
+            String name = nameValue.getAsString();
+            String date = dateValue.getAsString();
+            if (!date.isEmpty()) date = dateValue.getAsString();
+            else date = "Уточните у организатора";
+            String description = descriptionValue.getAsString();
+
+            EmbedBuilder eventBuilder = new EmbedBuilder();
+            eventBuilder.setColor(Color.decode("#9400D3"));
+
+            eventBuilder.setTitle(userName + " создаёт событие!");
+            eventBuilder.addField("Тема:", name, false);
+            eventBuilder.addField("Дата начала:", date, false);
+            eventBuilder.addField("Описание:", description, false);
+
+            event.replyEmbeds(eventBuilder.build()).queue();
+        }
     }
 
     public void changeLogBuilder(ModalInteractionEvent event) {
