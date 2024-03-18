@@ -8,6 +8,7 @@ import discord.bot.omegaloli.listener.rules.RulesUpdateListener;
 import discord.bot.omegaloli.listener.user.member.MemberJoinsListener;
 import discord.bot.omegaloli.listener.user.experience.UserExperienceListener;
 
+import discord.bot.omegaloli.command.fun.RPSCommand;
 import discord.bot.omegaloli.command.global.HelpCommand;
 import discord.bot.omegaloli.command.global.EventCommand;
 import discord.bot.omegaloli.command.dev.ChangeLogCommand;
@@ -53,6 +54,9 @@ public class DiscordBotApplication implements CommandLineRunner {
 
 						// DEV
 						new ChangeLogCommand(),
+
+						// FUN
+						new RPSCommand(),
 
 						// GLOBAL
 						new HelpCommand(),
