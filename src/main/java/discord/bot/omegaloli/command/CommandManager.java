@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class CommandManager extends ListenerAdapter {
 
-    private List<CommandInterface> commands = new ArrayList<>();
+    private final List<CommandInterface> commands = new ArrayList<>();
 
     @Override
     public void onReady(@NotNull ReadyEvent event) {

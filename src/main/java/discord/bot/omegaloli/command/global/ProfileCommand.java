@@ -27,12 +27,12 @@ public class ProfileCommand implements CommandInterface {
 
     @Override
     public String genName() {
-        return "профиль";
+        return "profile";
     }
 
     @Override
     public String getDescription() {
-        return "Профиль пользователя";
+        return "Получить информацию о профиле пользователя";
     }
 
     @Override
@@ -40,7 +40,8 @@ public class ProfileCommand implements CommandInterface {
 
         List<OptionData> data = new ArrayList<>();
         data.add(
-                new OptionData(OptionType.STRING, "пользователь", "Введите тег пользователя", false)
+                new OptionData(OptionType.STRING, "пользователь", "Введите тег пользователя. " +
+                        "Чтобы получить свой профиль, просто оставьте поле пустым", false)
         );
 
         return data;

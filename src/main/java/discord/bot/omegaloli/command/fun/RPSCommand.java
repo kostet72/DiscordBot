@@ -16,7 +16,7 @@ public class RPSCommand implements CommandInterface {
 
     @Override
     public String genName() {
-        return "суефа";
+        return "suefa";
     }
 
     @Override

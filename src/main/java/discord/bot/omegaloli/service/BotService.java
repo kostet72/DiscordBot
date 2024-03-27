@@ -7,6 +7,7 @@ import discord.bot.omegaloli.command.CommandInterface;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class BotService {
     public void startBot() {
 
         jda = JDABuilder.createDefault(config.getToken())
+                .enableCache(CacheFlag.VOICE_STATE)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS)
                 .setActivity(Activity.customStatus("Заглядывай в #dev"))
                 .build();

@@ -14,7 +14,7 @@ public class EventCommand implements CommandInterface {
 
     @Override
     public String genName() {
-        return "событие";
+        return "event";
     }
 
     @Override

@@ -12,12 +12,12 @@ public class HelpCommand implements CommandInterface {
 
     @Override
     public String genName() {
-        return "помощь";
+        return "help";
     }
 
     @Override
     public String getDescription() {
-        return "Список возможностей бота";
+        return "Список команд и возможностей бота";
     }
 
     @Override

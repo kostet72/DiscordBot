@@ -8,11 +8,10 @@ import discord.bot.omegaloli.listener.rules.RulesUpdateListener;
 import discord.bot.omegaloli.listener.user.member.MemberJoinsListener;
 import discord.bot.omegaloli.listener.user.experience.UserExperienceListener;
 
-import discord.bot.omegaloli.command.fun.RPSCommand;
-import discord.bot.omegaloli.command.global.HelpCommand;
-import discord.bot.omegaloli.command.global.EventCommand;
-import discord.bot.omegaloli.command.dev.ChangeLogCommand;
-import discord.bot.omegaloli.command.global.ProfileCommand;
+import discord.bot.omegaloli.command.fun.*;
+import discord.bot.omegaloli.command.dev.*;
+import discord.bot.omegaloli.command.music.*;
+import discord.bot.omegaloli.command.global.*;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -55,13 +54,16 @@ public class DiscordBotApplication implements CommandLineRunner {
 						// DEV
 						new ChangeLogCommand(),
 
-						// FUN
-						new RPSCommand(),
-
 						// GLOBAL
 						new HelpCommand(),
 						new ProfileCommand(userService),
-						new EventCommand()
+						new EventCommand(),
+
+						// FUN
+						new RPSCommand(),
+
+						// MUSIC
+						new PlayCommand()
 				))
 		);
 	}

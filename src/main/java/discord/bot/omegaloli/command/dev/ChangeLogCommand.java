@@ -16,7 +16,7 @@ public class ChangeLogCommand implements CommandInterface {
 
     @Override
     public String genName() {
-        return "дев";
+        return "changelog";
     }
 
     @Override

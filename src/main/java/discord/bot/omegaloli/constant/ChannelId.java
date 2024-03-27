@@ -6,4 +6,5 @@ public final class ChannelId {
     public static final Long RULES_CHANNEL = 1216293255776309318L;
     public static final Long NEWS_CHANNEL = 1216297629630337074L;
     public static final Long GLOBAL_CHANNEL = 1216326852566716437L;
+    public static final Long MUSIC_CHANNEL = 1222500923515994192L;
 }
