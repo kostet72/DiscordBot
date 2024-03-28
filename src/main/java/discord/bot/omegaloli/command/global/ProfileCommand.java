@@ -26,7 +26,7 @@ public class ProfileCommand implements CommandInterface {
     private final BotUserService userService;
 
     @Override
-    public String genName() {
+    public String getName() {
         return "profile";
     }
 

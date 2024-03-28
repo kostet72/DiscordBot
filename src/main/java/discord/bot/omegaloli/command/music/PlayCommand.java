@@ -12,14 +12,13 @@ import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 
-import java.net.*;
 import java.util.List;
 import java.util.ArrayList;
 
 public class PlayCommand implements CommandInterface {
 
     @Override
-    public String genName() {
+    public String getName() {
         return "play";
     }
 
@@ -32,7 +31,7 @@ public class PlayCommand implements CommandInterface {
     public List<OptionData> getOptions() {
 
         List<OptionData> data = new ArrayList<>();
-        data.add(new OptionData(OptionType.STRING, "промт", "Добавьте название/год выхода/автора или другую информацию, " +
+        data.add(new OptionData(OptionType.STRING, "промпт", "Добавьте название/год выхода/автора или другую информацию, " +
                 "по которой можно отыскать аудио на ютубе", true));
 
         return data;
@@ -45,35 +44,29 @@ public class PlayCommand implements CommandInterface {
         GuildVoiceState memberVoiceState = event.getMember().getVoiceState();
         GuildVoiceState selfVoiceState = event.getGuild().getSelfMember().getVoiceState();
 
-        String link = String.join(" ", event.getOption("промт").getAsString());
+        String link = "ytsearch:" + String.join(" ", event.getOption("промпт").getAsString()) + " audio";
 
-        if (!isUrl(link))
-            link = "ytsearch:" + link + " audio";
-
-        if (memberVoiceState != null && !memberVoiceState.inAudioChannel()) {
+        if (!memberVoiceState.inAudioChannel()) {
             event.reply("Ты должен находиться в голосовом канале, чтобы использовать эту команду").setEphemeral(true).queue();
             return;
         }
 
-        if (selfVoiceState != null && !selfVoiceState.inAudioChannel()) {
+        if (!selfVoiceState.inAudioChannel()) {
 
             final AudioManager audioManager = event.getGuild().getAudioManager();
             final VoiceChannel voiceChannel = (VoiceChannel) event.getMember().getVoiceState().getChannel();
 
             audioManager.openAudioConnection(voiceChannel);
         }
+        else {
+            if (memberVoiceState.getChannel() != selfVoiceState.getChannel()) {
+                event.reply("Ты должен находиться в одном голосовом канале с ботом").setEphemeral(true).queue();
+                return;
+            }
+        }
 
+        event.reply("Ожидайте сообщения о добавлении вашего трека в очередь. " +
+                "Если ваш трек так и не заиграл, поробуйте снова, изменив промпт").setEphemeral(true).queue();
         PlayerManager.getInstance().play(channel, link);
-    }
-
-    public boolean isUrl(String link) {
-
-        try {
-            new URI(link);
-            return true;
-        }
-        catch (URISyntaxException e) {
-            return false;
-        }
     }
 }

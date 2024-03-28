@@ -11,7 +11,7 @@ import java.util.List;
 public class HelpCommand implements CommandInterface {
 
     @Override
-    public String genName() {
+    public String getName() {
         return "help";
     }
 

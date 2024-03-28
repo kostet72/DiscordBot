@@ -52,7 +52,7 @@ public class PlayerManager {
 
                 musicManager.getTrackScheduler().queue(audioTrack);
                 textChannel.sendMessage(String.format(
-                        "Добавялю в очередь \"%s\" - %s",
+                        "Добавялю в очередь:   **%s**   в исполнении   **%s**",
                         audioTrack.getInfo().title,
                         audioTrack.getInfo().author
                 )).queue();
@@ -67,7 +67,7 @@ public class PlayerManager {
 
                     musicManager.getTrackScheduler().queue(tracks.get(0));
                     textChannel.sendMessage(String.format(
-                            "Добавялю в очередь \"%s\" - %s",
+                            "Добавялю в очередь:   **%s**   в исполнении   **%s**",
                             tracks.get(0).getInfo().title,
                             tracks.get(0).getInfo().author
                     )).queue();

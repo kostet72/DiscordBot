@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class RPSCommand implements CommandInterface {
 
     @Override
-    public String genName() {
+    public String getName() {
         return "suefa";
     }
 

@@ -21,9 +21,9 @@ public class CommandManager extends ListenerAdapter {
             for (CommandInterface command : commands) {
 
                 if (command.getOptions() != null)
-                    guild.upsertCommand(command.genName(), command.getDescription()).addOptions(command.getOptions()).queue();
+                    guild.upsertCommand(command.getName(), command.getDescription()).addOptions(command.getOptions()).queue();
                 else
-                    guild.upsertCommand(command.genName(), command.getDescription()).queue();
+                    guild.upsertCommand(command.getName(), command.getDescription()).queue();
             }
     }
 
@@ -31,7 +31,7 @@ public class CommandManager extends ListenerAdapter {
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
 
         for (CommandInterface command : commands)
-            if (command.genName().equals(event.getName())) {
+            if (command.getName().equals(event.getName())) {
 
                 command.execute(event);
                 return;

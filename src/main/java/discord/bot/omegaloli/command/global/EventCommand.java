@@ -13,7 +13,7 @@ import java.util.List;
 public class EventCommand implements CommandInterface {
 
     @Override
-    public String genName() {
+    public String getName() {
         return "event";
     }
 

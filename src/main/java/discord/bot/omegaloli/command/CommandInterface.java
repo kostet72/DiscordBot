@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CommandInterface {
 
-    String genName();
+    String getName();
     String getDescription();
     List<OptionData> getOptions();
 

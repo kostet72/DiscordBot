@@ -15,7 +15,7 @@ import java.util.List;
 public class ChangeLogCommand implements CommandInterface {
 
     @Override
-    public String genName() {
+    public String getName() {
         return "changelog";
     }
 

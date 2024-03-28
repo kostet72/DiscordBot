@@ -63,7 +63,9 @@ public class DiscordBotApplication implements CommandLineRunner {
 						new RPSCommand(),
 
 						// MUSIC
-						new PlayCommand()
+						new PlayCommand(),
+						new SkipCommand(),
+						new StopCommand()
 				))
 		);
 	}
