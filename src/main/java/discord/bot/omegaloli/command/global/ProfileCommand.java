@@ -6,9 +6,8 @@ import discord.bot.omegaloli.service.BotUserService;
 import discord.bot.omegaloli.command.CommandInterface;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 
@@ -39,8 +38,7 @@ public class ProfileCommand implements CommandInterface {
 
         List<OptionData> data = new ArrayList<>();
         data.add(
-                new OptionData(OptionType.STRING, "пользователь", "Введите тег пользователя. " +
-                        "Чтобы получить свой профиль, просто оставьте поле пустым", false)
+                new OptionData(OptionType.USER, "пользователь", "Выберите пользователя", true)
         );
 
         return data;
@@ -49,34 +47,25 @@ public class ProfileCommand implements CommandInterface {
     @Override
     public void execute(SlashCommandInteraction event) {
 
-        EmbedBuilder builder;
-        OptionMapping name = event.getOption("пользователь");
-        User user = event.getUser();
-        Long userId = user.getIdLong();
+        Member userToCheck = event.getOption("пользователь").getAsMember();
 
-        if (name == null && Boolean.TRUE.equals(userService.checkUserRegistry(userId, null))) {
+        if (userToCheck != null && Boolean.TRUE.equals(userService.checkUserRegistry(userToCheck.getIdLong(), null))) {
 
-            builder = profileBuilder(userService.getUserInfoById(userId));
-            event.replyEmbeds(builder.build()).queue();
+            event.replyEmbeds(profileBuilder(
+                    userService.getUserInfoById(userToCheck.getIdLong()))
+                    .build()
+            ).queue();
         }
-        else if (name != null && Boolean.TRUE.equals(userService.checkUserRegistry(null, name.getAsString()))) {
-
-            builder = profileBuilder(userService.getUserInfoByName(name.getAsString()));
-            event.replyEmbeds(builder.build()).queue();
-        }
-        else event.reply(TextMessage.USER_NOT_FOUND_MESSAGE).setEphemeral(true).queue();
+        else event.reply(TextMessage.USER_NOT_FOUND_EXCEPTION).setEphemeral(true).queue();
     }
 
     private static EmbedBuilder profileBuilder(BotUser botUser) {
 
-        EmbedBuilder profileBuilder = new EmbedBuilder();
-        profileBuilder.setColor(Color.decode("#9400D3"));
-
-        profileBuilder.setTitle(botUser.getName());
-        profileBuilder.addField("Уровень", botUser.getLvl(), true);
-        profileBuilder.addField("Cообщений", botUser.getExperience().toString(), true);
-        profileBuilder.addField("В числе участников", "с " + botUser.getRegistrationDate().format(DateTimeFormatter.ISO_DATE), false);
-
-        return profileBuilder;
+        return new EmbedBuilder()
+                .setColor(Color.decode("#9400D3"))
+                .setTitle(botUser.getName())
+                .addField("Уровень", botUser.getLvl(), true)
+                .addField("Cообщений", botUser.getExperience().toString(), true)
+                .addField("В числе участников", "с " + botUser.getRegistrationDate().format(DateTimeFormatter.ISO_DATE), false);
     }
 }

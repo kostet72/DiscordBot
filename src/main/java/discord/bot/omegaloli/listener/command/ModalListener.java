@@ -37,15 +37,14 @@ public class ModalListener extends ListenerAdapter {
             else date = "Уточните у организатора";
             String description = descriptionValue.getAsString();
 
-            EmbedBuilder eventBuilder = new EmbedBuilder();
-            eventBuilder.setColor(Color.decode("#9400D3"));
-
-            eventBuilder.setTitle(userName + " создаёт событие!");
-            eventBuilder.addField("Тема:", name, false);
-            eventBuilder.addField("Дата начала:", date, false);
-            eventBuilder.addField("Описание:", description, false);
-
-            event.replyEmbeds(eventBuilder.build()).queue();
+            event.replyEmbeds(new EmbedBuilder()
+                    .setColor(Color.decode("#9400D3"))
+                    .setTitle(userName + " создаёт событие!")
+                    .addField("Тема:", name, false)
+                    .addField("Дата начала:", date, false)
+                    .addField("Описание:", description, false)
+                    .build()
+            ).queue();
         }
     }
 
@@ -61,19 +60,17 @@ public class ModalListener extends ListenerAdapter {
             String author = authorValue.getAsString();
             String changes = changesValue.getAsString();
 
-            EmbedBuilder changeLogBuilder = new EmbedBuilder();
-            changeLogBuilder.setColor(Color.decode("#9400D3"));
-
-            changeLogBuilder.setTitle("Список изменений");
-            changeLogBuilder.addField("Версия:", version, true);
-            changeLogBuilder.addField("Автор:", author, true);
-            changeLogBuilder.addField("Список изменений:", changes, false);
-            changeLogBuilder.addBlankField(false);
-
-            changeLogBuilder.setFooter("Тыкай по синему тексту, чтобы перейти на GitHub проекта");
-            changeLogBuilder.setUrl("https://github.com/kostet72/DiscordBot");
-
-            event.replyEmbeds(changeLogBuilder.build()).queue();
+            event.replyEmbeds(new EmbedBuilder()
+                    .setColor(Color.decode("#9400D3"))
+                    .setTitle("Список изменений")
+                    .addField("Версия:", version, true)
+                    .addField("Автор:", author, true)
+                    .addField("Список изменений:", changes, false)
+                    .addBlankField(false)
+                    .setFooter("Тыкай по синему тексту, чтобы перейти на GitHub проекта")
+                    .setUrl("https://github.com/kostet72/DiscordBot")
+                    .build()
+            ).queue();
         }
     }
 }

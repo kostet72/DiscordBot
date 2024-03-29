@@ -85,16 +85,12 @@ public class PlayerManager {
         long durationInSeconds = track.getInfo().length / 1000;
         String duration = String.format("%02d:%02d:%02d", durationInSeconds / 3600, (durationInSeconds % 3600) / 60, durationInSeconds % 60);
 
-        EmbedBuilder trackBuilder = new EmbedBuilder();
-        trackBuilder.setColor(Color.decode("#9400D3"));
-
-        trackBuilder.setTitle("Добавляю в очередь:   **" + track.getInfo().title + "**");
-        trackBuilder.addField("Автор:", track.getInfo().author, true);
-        trackBuilder.addField("Продолжительность:", duration, true);
-
-        trackBuilder.setUrl(track.getInfo().uri);
-        trackBuilder.setThumbnail(track.getInfo().artworkUrl);
-
-        return trackBuilder;
+        return new EmbedBuilder()
+                .setColor(Color.decode("#9400D3"))
+                .setTitle("Добавляю в очередь:   **" + track.getInfo().title + "**")
+                .addField("Автор:", track.getInfo().author, true)
+                .addField("Продолжительность:", duration, true)
+                .setUrl(track.getInfo().uri)
+                .setThumbnail(track.getInfo().artworkUrl);
     }
 }

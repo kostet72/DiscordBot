@@ -63,12 +63,6 @@ public class BotUserService {
                 .block();
     }
 
-    public BotUser getUserInfoByName(String name) {
-        return template.selectOne(query(where("name").is(name)), BotUser.class)
-                .switchIfEmpty(Mono.empty())
-                .block();
-    }
-
     public void registerUser(User user) {
 
         template.getDatabaseClient()
