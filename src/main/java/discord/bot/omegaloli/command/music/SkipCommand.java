@@ -1,9 +1,8 @@
 package discord.bot.omegaloli.command.music;
 
+import discord.bot.omegaloli.player.*;
 import discord.bot.omegaloli.command.CommandInterface;
 
-import discord.bot.omegaloli.player.MusicManager;
-import discord.bot.omegaloli.player.PlayerManager;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;

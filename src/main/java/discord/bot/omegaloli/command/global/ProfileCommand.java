@@ -13,7 +13,6 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 
 import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.List;
@@ -57,28 +56,27 @@ public class ProfileCommand implements CommandInterface {
 
         if (name == null && Boolean.TRUE.equals(userService.checkUserRegistry(userId, null))) {
 
-            builder = embedBuilder(userService.getUserInfoById(userId));
+            builder = profileBuilder(userService.getUserInfoById(userId));
             event.replyEmbeds(builder.build()).queue();
         }
         else if (name != null && Boolean.TRUE.equals(userService.checkUserRegistry(null, name.getAsString()))) {
 
-            builder = embedBuilder(userService.getUserInfoByName(name.getAsString()));
+            builder = profileBuilder(userService.getUserInfoByName(name.getAsString()));
             event.replyEmbeds(builder.build()).queue();
         }
         else event.reply(TextMessage.USER_NOT_FOUND_MESSAGE).setEphemeral(true).queue();
     }
 
-    @NotNull
-    private static EmbedBuilder embedBuilder(BotUser botUser) {
+    private static EmbedBuilder profileBuilder(BotUser botUser) {
 
-        EmbedBuilder builder = new EmbedBuilder();
-        builder.setColor(Color.decode("#9400D3"));
+        EmbedBuilder profileBuilder = new EmbedBuilder();
+        profileBuilder.setColor(Color.decode("#9400D3"));
 
-        builder.setTitle(botUser.getName());
-        builder.addField("Уровень", botUser.getLvl(), true);
-        builder.addField("Cообщений", botUser.getExperience().toString(), true);
-        builder.addField("В числе участников", "с " + botUser.getRegistrationDate().format(DateTimeFormatter.ISO_DATE), false);
+        profileBuilder.setTitle(botUser.getName());
+        profileBuilder.addField("Уровень", botUser.getLvl(), true);
+        profileBuilder.addField("Cообщений", botUser.getExperience().toString(), true);
+        profileBuilder.addField("В числе участников", "с " + botUser.getRegistrationDate().format(DateTimeFormatter.ISO_DATE), false);
 
-        return builder;
+        return profileBuilder;
     }
 }

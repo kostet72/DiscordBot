@@ -1,5 +1,6 @@
 package discord.bot.omegaloli.player;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import com.sedmelluq.discord.lavaplayer.track.*;
 import com.sedmelluq.discord.lavaplayer.player.*;
@@ -7,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 
+import java.awt.*;
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
@@ -51,11 +53,7 @@ public class PlayerManager {
             public void trackLoaded(AudioTrack audioTrack) {
 
                 musicManager.getTrackScheduler().queue(audioTrack);
-                textChannel.sendMessage(String.format(
-                        "Добавялю в очередь:   **%s**   в исполнении   **%s**",
-                        audioTrack.getInfo().title,
-                        audioTrack.getInfo().author
-                )).queue();
+                textChannel.sendMessageEmbeds(trackBuilder(audioTrack).build()).addActionRow().queue();
             }
 
             @Override
@@ -66,11 +64,7 @@ public class PlayerManager {
                 if (!tracks.isEmpty()) {
 
                     musicManager.getTrackScheduler().queue(tracks.get(0));
-                    textChannel.sendMessage(String.format(
-                            "Добавялю в очередь:   **%s**   в исполнении   **%s**",
-                            tracks.get(0).getInfo().title,
-                            tracks.get(0).getInfo().author
-                    )).queue();
+                    textChannel.sendMessageEmbeds(trackBuilder(tracks.get(0)).build()).queue();
                 }
             }
 
@@ -84,5 +78,23 @@ public class PlayerManager {
 
             }
         });
+    }
+
+    private static EmbedBuilder trackBuilder(AudioTrack track) {
+
+        long durationInSeconds = track.getInfo().length / 1000;
+        String duration = String.format("%02d:%02d:%02d", durationInSeconds / 3600, (durationInSeconds % 3600) / 60, durationInSeconds % 60);
+
+        EmbedBuilder trackBuilder = new EmbedBuilder();
+        trackBuilder.setColor(Color.decode("#9400D3"));
+
+        trackBuilder.setTitle("Добавляю в очередь:   **" + track.getInfo().title + "**");
+        trackBuilder.addField("Автор:", track.getInfo().author, true);
+        trackBuilder.addField("Продолжительность:", duration, true);
+
+        trackBuilder.setUrl(track.getInfo().uri);
+        trackBuilder.setThumbnail(track.getInfo().artworkUrl);
+
+        return trackBuilder;
     }
 }
