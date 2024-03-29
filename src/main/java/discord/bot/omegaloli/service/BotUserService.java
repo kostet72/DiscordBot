@@ -5,10 +5,7 @@ import discord.bot.omegaloli.model.entity.BotUser;
 import discord.bot.omegaloli.constant.ServerRoleId;
 
 import reactor.core.publisher.Mono;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.*;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -28,36 +25,20 @@ public class BotUserService {
 
     private final R2dbcEntityTemplate template;
 
-    public Boolean checkUserRegistry(Long userId, String name) {
+    public Boolean checkUserRegistry(Long userId) {
 
-        if (userId != null) {
+        return template.exists(query(where("id").is(userId)), BotUser.class)
+                .flatMap(isExist -> {
 
-            return template.exists(query(where("id").is(userId)), BotUser.class)
-                    .flatMap(isExist -> {
+                    if (Boolean.TRUE.equals(isExist))
+                        return Mono.just(true);
 
-                        if (Boolean.TRUE.equals(isExist))
-                            return Mono.just(true);
-
-                        else return Mono.just(false);
-                    })
-                    .block();
-        }
-        else if (name != null) {
-
-            return template.exists(query(where("name").is(name)), BotUser.class)
-                    .flatMap(isExist -> {
-
-                        if (Boolean.TRUE.equals(isExist))
-                            return Mono.just(true);
-
-                        else return Mono.just(false);
-                    })
-                    .block();
-        }
-        else return false;
+                    else return Mono.just(false);
+                })
+                .block();
     }
 
-    public BotUser getUserInfoById(Long userId) {
+    public BotUser getUserInfo(Long userId) {
         return template.selectOne(query(where("id").is(userId)), BotUser.class)
                 .switchIfEmpty(Mono.empty())
                 .block();

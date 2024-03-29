@@ -24,11 +24,11 @@ public class MemberJoinsListener extends ListenerAdapter {
 
         if (!user.isBot() && channel != null) {
 
-            if (Boolean.TRUE.equals(userService.checkUserRegistry(user.getIdLong(), null))) {
+            if (Boolean.TRUE.equals(userService.checkUserRegistry(user.getIdLong()))) {
 
                 channel.sendMessage("С возвращением, " + user.getAsMention() + "! Рады снова тебя видеть").queue();
             }
-            else if (Boolean.FALSE.equals(userService.checkUserRegistry(user.getIdLong(), null))) {
+            else if (Boolean.FALSE.equals(userService.checkUserRegistry(user.getIdLong()))) {
 
                 userService.registerUser(user);
                 channel.sendMessage("Добро пожаловать, " + user.getAsMention() + "!").queue();

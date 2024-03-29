@@ -49,10 +49,10 @@ public class ProfileCommand implements CommandInterface {
 
         Member userToCheck = event.getOption("пользователь").getAsMember();
 
-        if (userToCheck != null && Boolean.TRUE.equals(userService.checkUserRegistry(userToCheck.getIdLong(), null))) {
+        if (userToCheck != null && Boolean.TRUE.equals(userService.checkUserRegistry(userToCheck.getIdLong()))) {
 
             event.replyEmbeds(profileBuilder(
-                    userService.getUserInfoById(userToCheck.getIdLong()))
+                    userService.getUserInfo(userToCheck.getIdLong()))
                     .build()
             ).queue();
         }
