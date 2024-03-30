@@ -3,5 +3,6 @@ CREATE TABLE users (
     name TEXT,
     lvl TEXT,
     experience INTEGER,
-    registration_date TIMESTAMP
+    registration_date TIMESTAMP,
+    warns_count INTEGER
 );

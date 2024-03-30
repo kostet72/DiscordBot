@@ -48,12 +48,22 @@ public class BotUserService {
 
         template.getDatabaseClient()
                 .sql(String.format(
-                        "INSERT INTO users (id, name, lvl, experience, registration_date) " +
-                                "VALUES ('%s', '%s', '%s', '%s', '%s') ON CONFLICT (id) DO NOTHING;",
-                        user.getIdLong(), user.getName(), "0", 0, Date.from(Instant.now())
+                        "INSERT INTO users (id, name, lvl, experience, registration_date, warns_count) " +
+                                "VALUES ('%s', '%s', '%s', '%s', '%s', '%s') ON CONFLICT (id) DO NOTHING;",
+                        user.getIdLong(), user.getName(), "0", 0, Date.from(Instant.now()), 0
                 ))
                 .fetch()
                 .rowsUpdated()
+                .block();
+    }
+
+    public void warnUser(Long userId) {
+
+        template.selectOne(query(where("id").is(userId)), BotUser.class)
+                        .flatMap(u -> template.update(query(where("id").is(userId)),
+                                update("warns_count", u.getWarnsCount() + 1),
+                                BotUser.class))
+                .switchIfEmpty(Mono.empty())
                 .block();
     }
 
@@ -108,5 +118,9 @@ public class BotUserService {
                 })
                 .switchIfEmpty(Mono.empty())
                 .block();
+    }
+
+    public void banUser(Long userId) {
+        template.delete(query(where("id").is(userId)), BotUser.class);
     }
 }

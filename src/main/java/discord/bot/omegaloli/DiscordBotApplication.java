@@ -10,6 +10,7 @@ import discord.bot.omegaloli.listener.user.experience.UserExperienceListener;
 
 import discord.bot.omegaloli.command.fun.*;
 import discord.bot.omegaloli.command.dev.*;
+import discord.bot.omegaloli.command.admin.*;
 import discord.bot.omegaloli.command.music.*;
 import discord.bot.omegaloli.command.global.*;
 
@@ -50,6 +51,7 @@ public class DiscordBotApplication implements CommandLineRunner {
 				bot.registerCommands(List.of(
 
 						// ADMIN
+						new WarnCommand(userService),
 
 						// DEV
 						new ChangeLogCommand(),

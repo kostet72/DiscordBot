@@ -18,4 +18,5 @@ public class BotUser {
     private String lvl;
     private Integer experience;
     private LocalDateTime registrationDate;
+    private Integer warnsCount;
 }
