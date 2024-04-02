@@ -1,21 +1,17 @@
 package discord.bot.omegaloli;
 
-import discord.bot.omegaloli.service.BotService;
-import discord.bot.omegaloli.service.BotUserService;
-
-import discord.bot.omegaloli.listener.command.ModalListener;
-import discord.bot.omegaloli.listener.rules.RulesUpdateListener;
-import discord.bot.omegaloli.listener.user.member.MemberJoinsListener;
-import discord.bot.omegaloli.listener.user.experience.UserExperienceListener;
-
+import discord.bot.omegaloli.service.*;
 import discord.bot.omegaloli.command.fun.*;
 import discord.bot.omegaloli.command.dev.*;
 import discord.bot.omegaloli.command.admin.*;
 import discord.bot.omegaloli.command.music.*;
 import discord.bot.omegaloli.command.global.*;
+import discord.bot.omegaloli.listener.command.ModalListener;
+import discord.bot.omegaloli.listener.rules.RulesUpdateListener;
+import discord.bot.omegaloli.listener.user.member.MemberJoinsListener;
+import discord.bot.omegaloli.listener.user.experience.UserExperienceListener;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.*;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +47,7 @@ public class DiscordBotApplication implements CommandLineRunner {
 				bot.registerCommands(List.of(
 
 						// ADMIN
+						new ExpCommand(),
 						new WarnCommand(userService),
 
 						// DEV
