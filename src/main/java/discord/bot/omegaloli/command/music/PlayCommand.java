@@ -5,15 +5,12 @@ import discord.bot.omegaloli.player.PlayerManager;
 import discord.bot.omegaloli.command.CommandInterface;
 
 import net.dv8tion.jda.api.managers.AudioManager;
+import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class PlayCommand implements CommandInterface {
 
@@ -65,8 +62,13 @@ public class PlayCommand implements CommandInterface {
             }
         }
 
-        event.reply("Ожидайте сообщения о добавлении вашего трека в очередь. " +
-                "Если ваш трек так и не заиграл, поробуйте снова, изменив промпт").setEphemeral(true).queue();
-        PlayerManager.getInstance().play(channel, link);
+        if (channel != null) {
+
+            event.reply("Ожидайте сообщения о добавлении вашего трека в очередь. " +
+                    "Если ваш трек так и не заиграл, поробуйте снова, изменив промпт").setEphemeral(true).queue();
+
+            PlayerManager.getInstance().play(channel, link);
+        }
+        else event.reply("Ошибка! На свервере не определён музыкальный канал").setEphemeral(true).queue();
     }
 }

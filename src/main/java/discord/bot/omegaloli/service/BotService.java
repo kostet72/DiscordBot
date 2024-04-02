@@ -1,11 +1,9 @@
 package discord.bot.omegaloli.service;
 
+import discord.bot.omegaloli.command.*;
 import discord.bot.omegaloli.config.BotConfig;
-import discord.bot.omegaloli.command.CommandManager;
-import discord.bot.omegaloli.command.CommandInterface;
 
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import net.dv8tion.jda.api.requests.GatewayIntent;

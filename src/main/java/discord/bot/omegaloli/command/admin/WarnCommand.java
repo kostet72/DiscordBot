@@ -1,17 +1,15 @@
 package discord.bot.omegaloli.command.admin;
 
-import discord.bot.omegaloli.constant.ChannelId;
-import discord.bot.omegaloli.constant.TextMessage;
+import discord.bot.omegaloli.constant.*;
 import discord.bot.omegaloli.model.entity.BotUser;
 import discord.bot.omegaloli.service.BotUserService;
 import discord.bot.omegaloli.command.CommandInterface;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
-import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,9 +36,7 @@ public class WarnCommand implements CommandInterface {
     public List<OptionData> getOptions() {
 
         List<OptionData> data = new ArrayList<>();
-        data.add(
-                new OptionData(OptionType.USER, "пользователь", "Введите тег пользователя", true)
-        );
+        data.add(new OptionData(OptionType.USER, "пользователь", "Выберите пользователя", true));
 
         return data;
     }
@@ -76,5 +72,6 @@ public class WarnCommand implements CommandInterface {
                 else event.reply(TextMessage.DO_NOT_HAVE_PERMISSION).setEphemeral(true).queue();
             }
         }
+        else event.reply(TextMessage.USER_NOT_FOUND_EXCEPTION).setEphemeral(true).queue();
     }
 }

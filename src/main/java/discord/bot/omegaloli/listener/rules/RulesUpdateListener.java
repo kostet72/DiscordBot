@@ -3,9 +3,8 @@ package discord.bot.omegaloli.listener.rules;
 import discord.bot.omegaloli.constant.ChannelId;
 
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.events.message.MessageUpdateEvent;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 
 import org.jetbrains.annotations.NotNull;

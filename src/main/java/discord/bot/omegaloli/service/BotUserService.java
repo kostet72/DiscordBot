@@ -57,14 +57,13 @@ public class BotUserService {
                 .block();
     }
 
-    public void warnUser(Long userId) {
+    public void setUserExperience(Long userId, Integer experience) {
 
-        template.selectOne(query(where("id").is(userId)), BotUser.class)
-                        .flatMap(u -> template.update(query(where("id").is(userId)),
-                                update("warns_count", u.getWarnsCount() + 1),
-                                BotUser.class))
-                .switchIfEmpty(Mono.empty())
-                .block();
+        String level = LVL.getLVLsRange(experience);
+
+        template.update(query(where("id").is(userId)),
+                update("experience", experience)
+                        .set("lvl", level), BotUser.class);
     }
 
     public String updateExperienceAndSetLevel(Long userId, MessageReceivedEvent event) {
@@ -116,6 +115,16 @@ public class BotUserService {
                             else return Mono.empty();
                         });
                 })
+                .switchIfEmpty(Mono.empty())
+                .block();
+    }
+
+    public void warnUser(Long userId) {
+
+        template.selectOne(query(where("id").is(userId)), BotUser.class)
+                .flatMap(u -> template.update(query(where("id").is(userId)),
+                        update("warns_count", u.getWarnsCount() + 1),
+                        BotUser.class))
                 .switchIfEmpty(Mono.empty())
                 .block();
     }

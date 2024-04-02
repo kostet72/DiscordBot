@@ -3,9 +3,8 @@ package discord.bot.omegaloli.command.global;
 import discord.bot.omegaloli.command.CommandInterface;
 
 import net.dv8tion.jda.api.interactions.modals.Modal;
+import net.dv8tion.jda.api.interactions.components.text.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.interactions.components.text.TextInput;
-import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 
 import java.util.List;

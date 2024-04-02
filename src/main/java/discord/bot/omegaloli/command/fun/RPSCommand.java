@@ -3,14 +3,10 @@ package discord.bot.omegaloli.command.fun;
 import discord.bot.omegaloli.constant.TextMessage;
 import discord.bot.omegaloli.command.CommandInterface;
 
-import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 
-import java.util.List;
-import java.util.Random;
-import java.util.ArrayList;
+import java.util.*;
 
 public class RPSCommand implements CommandInterface {
 
@@ -28,11 +24,11 @@ public class RPSCommand implements CommandInterface {
     public List<OptionData> getOptions() {
 
         List<OptionData> data = new ArrayList<>();
-        data.add(
-                new OptionData(OptionType.STRING, "выбор", "Ваберите камень, ножницы или бумагу", true)
-                        .addChoice("Камень", "Камень")
-                        .addChoice("Ножницы", "Ножницы")
-                        .addChoice("Бумага", "Бумага")
+        data.add(new OptionData(OptionType.STRING, "выбор",
+                "Ваберите камень, ножницы или бумагу", true)
+                .addChoice("Камень", "Камень")
+                .addChoice("Ножницы", "Ножницы")
+                .addChoice("Бумага", "Бумага")
         );
 
         return data;
@@ -51,8 +47,8 @@ public class RPSCommand implements CommandInterface {
             String result = winnerVerification(playerMove, botMove);
 
             event.reply(TextMessage.POCK_PAPER_SCISSORS_MESSAGE +
-                    "```Ход опонента - " + botMove + "\nВаш ход - " + playerMove + "```" +
-                    result).queue();
+                    "```Ход опонента - " + botMove + "\nВаш ход - " + playerMove + "```" + result
+            ).queue();
         }
     }
 

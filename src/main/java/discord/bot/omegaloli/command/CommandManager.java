@@ -7,8 +7,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class CommandManager extends ListenerAdapter {
 

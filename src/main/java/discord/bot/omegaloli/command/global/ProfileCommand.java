@@ -7,9 +7,8 @@ import discord.bot.omegaloli.command.CommandInterface;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 
 import lombok.RequiredArgsConstructor;
 
