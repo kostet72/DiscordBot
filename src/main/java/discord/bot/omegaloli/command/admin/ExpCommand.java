@@ -25,7 +25,7 @@ public class ExpCommand implements CommandInterface {
 
     @Override
     public String getDescription() {
-        return "Установить количество опыта пользователю";
+        return "Добавить опыта пользователю";
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ExpCommand implements CommandInterface {
         if (userToGiveExp != null && event.getMember().hasPermission(Permission.BAN_MEMBERS)
                 && Boolean.TRUE.equals(userService.checkUserRegistry(userToGiveExp.getIdLong()))) {
 
-            userService.setUserExperience(userToGiveExp.getIdLong(), experience);
+            userService.updateExperienceAndSetLevel(userToGiveExp.getIdLong(), event.getMember(), event.getGuild(), experience);
             event.reply("Опыт успешно добавлен пользователю").setEphemeral(true).queue();
         }
         else event.reply(TextMessage.USER_NOT_FOUND_EXCEPTION).setEphemeral(true).queue();
