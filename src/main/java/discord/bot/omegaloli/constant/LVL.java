@@ -2,15 +2,15 @@ package discord.bot.omegaloli.constant;
 
 public enum LVL {
 
-    LVL_1(30, 100, "1"),
-    LVL_2(100, 200, "2"),
-    LVL_3(200, 350, "3"),
-    LVL_4(350, 550, "4"),
-    LVL_5(550, 800, "5");
+    LVL_1(50, 150, "1"),
+    LVL_2(150, 300, "2"),
+    LVL_3(300, 500, "3"),
+    LVL_4(500, 750, "4"),
+    LVL_5(750, 1000, "5");
 
-    public Integer min;
-    public Integer max;
-    public String level;
+    public final Integer min;
+    public final Integer max;
+    public final String level;
 
     LVL(Integer min, Integer max, String level) {
         this.min = min;

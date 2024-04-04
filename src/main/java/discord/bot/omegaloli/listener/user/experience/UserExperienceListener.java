@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -23,9 +24,33 @@ public class UserExperienceListener extends ListenerAdapter {
         MessageChannel channel = event.getGuild().getTextChannelById(ChannelId.GLOBAL_CHANNEL);
         int length = event.getMessage().getContentRaw().length();
 
-        String answer = userService.updateExperienceAndSetLevel(user.getIdLong(), event.getMember(), event.getGuild(), 1);
+        if (!user.isBot() && Boolean.FALSE.equals(userService.checkUserRegistry(user.getIdLong())))
+            userService.registerUser(user);
 
-        if (!user.isBot() && channel != null && length >= 5 && answer != null)
-            channel.sendMessage(user.getAsMention() + " достиг " + answer + "-го уровня!").queue();
+        if (!user.isBot() && channel != null && length >= 5) {
+
+            String answer = userService.updateExperienceAndSetLevel(user.getIdLong(), event.getMember(), event.getGuild(), 2);
+
+            if (answer != null)
+                channel.sendMessage(user.getAsMention() + " достиг " + answer + "-го уровня!").queue();
+        }
+    }
+
+    @Override
+    public void onMessageReactionAdd(MessageReactionAddEvent event) {
+
+        User user = event.getUser();
+        MessageChannel channel = event.getGuild().getTextChannelById(ChannelId.GLOBAL_CHANNEL);
+
+        if (!user.isBot() && Boolean.FALSE.equals(userService.checkUserRegistry(user.getIdLong())))
+            userService.registerUser(user);
+
+        if (!user.isBot() && channel != null) {
+
+            String answer = userService.updateExperienceAndSetLevel(user.getIdLong(), event.getMember(), event.getGuild(), 1);
+
+            if (answer != null)
+                channel.sendMessage(user.getAsMention() + " достиг " + answer + "-го уровня!").queue();
+        }
     }
 }
