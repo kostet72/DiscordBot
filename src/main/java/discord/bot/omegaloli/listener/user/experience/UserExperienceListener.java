@@ -37,7 +37,7 @@ public class UserExperienceListener extends ListenerAdapter {
     }
 
     @Override
-    public void onMessageReactionAdd(MessageReactionAddEvent event) {
+    public void onMessageReactionAdd(@NotNull MessageReactionAddEvent event) {
 
         User user = event.getUser();
         MessageChannel channel = event.getGuild().getTextChannelById(ChannelId.GLOBAL_CHANNEL);

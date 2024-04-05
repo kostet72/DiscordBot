@@ -16,7 +16,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ExpCommand implements CommandInterface {
 
-    private BotUserService userService;
+    private final BotUserService userService;
 
     @Override
     public String getName() {

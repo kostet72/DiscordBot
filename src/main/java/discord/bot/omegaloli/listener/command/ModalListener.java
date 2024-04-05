@@ -1,15 +1,21 @@
 package discord.bot.omegaloli.listener.command;
 
+import discord.bot.omegaloli.service.BotUserService;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.modals.ModalMapping;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
+@RequiredArgsConstructor
 public class ModalListener extends ListenerAdapter {
+
+    private final BotUserService userService;
 
     @Override
     public void onModalInteraction(@NotNull ModalInteractionEvent event) {
@@ -19,6 +25,8 @@ public class ModalListener extends ListenerAdapter {
 
         if (event.getModalId().equals("create-change-log"))
             changeLogBuilder(event);
+
+        userService.updateExperienceAndSetLevel(event.getUser().getIdLong(), event.getMember(), event.getGuild(), 3);
     }
 
     public void eventBuilder(ModalInteractionEvent event) {

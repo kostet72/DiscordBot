@@ -42,12 +42,12 @@ public class DiscordBotApplication implements CommandLineRunner {
 				new MemberJoinsListener(userService),
 				new UserExperienceListener(userService),
 				new RulesUpdateListener(),
-				new ModalListener(),
+				new ModalListener(userService),
 
 				bot.registerCommands(List.of(
 
 						// ADMIN
-						new ExpCommand(),
+						new ExpCommand(userService),
 						new WarnCommand(userService),
 
 						// DEV
@@ -59,7 +59,7 @@ public class DiscordBotApplication implements CommandLineRunner {
 						new EventCommand(),
 
 						// FUN
-						new RPSCommand(),
+						new RPSCommand(userService),
 
 						// MUSIC
 						new PlayCommand(),

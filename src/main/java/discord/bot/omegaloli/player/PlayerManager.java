@@ -9,9 +9,8 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 
 import java.awt.*;
-import java.util.Map;
+import java.util.*;
 import java.util.List;
-import java.util.HashMap;
 
 public class PlayerManager {
 

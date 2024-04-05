@@ -1,14 +1,20 @@
 package discord.bot.omegaloli.command.fun;
 
 import discord.bot.omegaloli.constant.TextMessage;
+import discord.bot.omegaloli.service.BotUserService;
 import discord.bot.omegaloli.command.CommandInterface;
 
 import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.*;
 
+@RequiredArgsConstructor
 public class RPSCommand implements CommandInterface {
+
+    private final BotUserService userService;
 
     @Override
     public String getName() {
@@ -45,6 +51,18 @@ public class RPSCommand implements CommandInterface {
             String playerMove = option.getAsString();
             String botMove = generateRandomMove(moves);
             String result = winnerVerification(playerMove, botMove);
+
+            switch (result) {
+
+                case TextMessage.BOT_WINS_MESSAGE:
+                    userService.updateExperienceAndSetLevel(event.getUser().getIdLong(), event.getMember(), event.getGuild(), 1);
+
+                case TextMessage.DRAW_MESSAGE:
+                    userService.updateExperienceAndSetLevel(event.getUser().getIdLong(), event.getMember(), event.getGuild(), 2);
+
+                case TextMessage.PLAYER_WINS_MESSAGE:
+                    userService.updateExperienceAndSetLevel(event.getUser().getIdLong(), event.getMember(), event.getGuild(), 3);
+            }
 
             event.reply(TextMessage.POCK_PAPER_SCISSORS_MESSAGE +
                     "```Ход опонента - " + botMove + "\nВаш ход - " + playerMove + "```" + result

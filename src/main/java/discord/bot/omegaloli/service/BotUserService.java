@@ -1,8 +1,7 @@
 package discord.bot.omegaloli.service;
 
-import discord.bot.omegaloli.constant.LVL;
+import discord.bot.omegaloli.constant.*;
 import discord.bot.omegaloli.model.entity.BotUser;
-import discord.bot.omegaloli.constant.ServerRoleId;
 
 import reactor.core.publisher.Mono;
 import net.dv8tion.jda.api.entities.*;

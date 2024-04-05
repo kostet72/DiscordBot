@@ -18,7 +18,6 @@ import java.util.List;
 public class BotService {
 
     private JDA jda;
-
     private final BotConfig config;
 
     public void startBot() {

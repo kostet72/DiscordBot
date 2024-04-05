@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class RulesUpdateListener extends ListenerAdapter {
 
     @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(@NotNull MessageReceivedEvent event) {
 
         User user = event.getAuthor();
         MessageChannel rulesChannel = event.getChannel();
