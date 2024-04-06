@@ -68,7 +68,7 @@ public class WarnCommand implements CommandInterface {
                             "Когда их число достигнет трёх, он будет забанен").queue();
                     event.reply("Пользователь получил предупреждение").setEphemeral(true).queue();
                 }
-                else event.reply(TextMessage.DO_NOT_HAVE_PERMISSION).setEphemeral(true).queue();
+                else event.reply(TextMessage.DO_NOT_HAVE_PERMISSION_EXCEPTION).setEphemeral(true).queue();
             }
         }
         else event.reply(TextMessage.USER_NOT_FOUND_EXCEPTION).setEphemeral(true).queue();
