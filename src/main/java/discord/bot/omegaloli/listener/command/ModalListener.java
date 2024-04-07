@@ -3,6 +3,7 @@ package discord.bot.omegaloli.listener.command;
 import discord.bot.omegaloli.service.BotUserService;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.modals.ModalMapping;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
@@ -35,7 +36,7 @@ public class ModalListener extends ListenerAdapter {
         ModalMapping dateValue = event.getValue("event-date");
         ModalMapping descriptionValue = event.getValue("event-description-field");
 
-        String userName = event.getUser().getName();
+        User user = event.getUser();
 
         if (nameValue != null && dateValue != null && descriptionValue != null) {
 
@@ -48,7 +49,8 @@ public class ModalListener extends ListenerAdapter {
             event.replyEmbeds(
                     new EmbedBuilder()
                             .setColor(Color.decode("#9400D3"))
-                            .setTitle(userName + " создаёт событие!")
+                            .setAuthor(user.getName(), "https://discord.com/users/" + user.getId(), user.getAvatarUrl())
+                            .setTitle("**создаёт событие!**")
                             .addField("Тема:", name, false)
                             .addField("Дата начала:", date, false)
                             .addField("Описание:", description, false)
@@ -63,6 +65,8 @@ public class ModalListener extends ListenerAdapter {
         ModalMapping authorValue = event.getValue("change-log-author");
         ModalMapping changesValue = event.getValue("change-log-list");
 
+        User user = event.getUser();
+
         if (versionValue != null && authorValue != null && changesValue != null) {
 
             String version = versionValue.getAsString();
@@ -72,9 +76,10 @@ public class ModalListener extends ListenerAdapter {
             event.replyEmbeds(
                     new EmbedBuilder()
                             .setColor(Color.decode("#9400D3"))
-                            .setTitle("Список изменений")
+                            .setAuthor(user.getName(), "https://discord.com/users/" + user.getId(), user.getAvatarUrl())
+                            .setTitle("**Список изменений**")
                             .addField("Версия:", version, true)
-                            .addField("Автор:", author, true)
+                            .addField("Работали над изменениями:", author, true)
                             .addField("Список изменений:", changes, false)
                             .addBlankField(false)
                             .setFooter("Тыкай по синему тексту, чтобы перейти на GitHub проекта")

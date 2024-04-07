@@ -47,7 +47,7 @@ public class ChangeLogCommand implements CommandInterface {
 
             TextInput changeLogAuthor = (
                     TextInput.create("change-log-author",
-                                    "Автор изменений",
+                                    "Разработчики",
                                     TextInputStyle.PARAGRAPH)
                             .setRequired(true)
                             .setRequiredRange(1, 30)

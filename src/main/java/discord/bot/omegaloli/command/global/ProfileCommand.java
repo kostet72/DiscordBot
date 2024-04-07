@@ -5,8 +5,8 @@ import discord.bot.omegaloli.model.entity.BotUser;
 import discord.bot.omegaloli.service.BotUserService;
 import discord.bot.omegaloli.command.CommandInterface;
 
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
@@ -51,20 +51,22 @@ public class ProfileCommand implements CommandInterface {
         if (userToCheck != null && Boolean.TRUE.equals(userService.checkUserRegistry(userToCheck.getIdLong()))) {
 
             event.replyEmbeds(profileBuilder(
-                    userService.getUserInfo(userToCheck.getIdLong()))
+                    userService.getUserInfo(userToCheck.getIdLong()), userToCheck)
                     .build()
             ).queue();
         }
         else event.reply(TextMessage.USER_NOT_FOUND_EXCEPTION).setEphemeral(true).queue();
     }
 
-    private static EmbedBuilder profileBuilder(BotUser botUser) {
+    private static EmbedBuilder profileBuilder(BotUser botUser, Member member) {
+
+        User user = member.getUser();
 
         return new EmbedBuilder()
                 .setColor(Color.decode("#9400D3"))
-                .setTitle(botUser.getName())
+                .setAuthor(user.getName(), "https://discord.com/users/" + user.getId(), user.getAvatarUrl())
                 .addField("Уровень", botUser.getLvl(), true)
-                .addField("Cообщений", botUser.getExperience().toString(), true)
+                .addField("Опыт", botUser.getExperience().toString(), true)
                 .addField("В числе участников", "с " + botUser.getRegistrationDate().format(DateTimeFormatter.ISO_DATE), false);
     }
 }
