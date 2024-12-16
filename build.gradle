@@ -4,23 +4,15 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'discord.bot'
-version = '1.7'
+group = 'jda.bot'
+version = '2.0'
 
 java {
 	sourceCompatibility = '17'
 }
 
 repositories {
-
 	mavenCentral()
-
-	maven {
-		url 'https://jitpack.io'
-	}
-	maven {
-		url "https://s01.oss.sonatype.org/content/repositories/snapshots"
-	}
 }
 
 dependencies {
@@ -34,13 +26,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 
 	// Discord API
-	implementation("net.dv8tion:JDA:5.0.0-beta.18")
-	implementation 'com.github.walkyst:lavaplayer-fork:1.4.3'
-	implementation 'dev.arbjerg:lavaplayer:727959e9f621fc457b3a5adafcfffb55fdeaa538-SNAPSHOT'
+	implementation("net.dv8tion:JDA:5.2.1")
 
-	// DATABASE
-	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-	implementation group: 'org.flywaydb', name: 'flyway-core', version: '9.0.0'
-	runtimeOnly 'org.postgresql:postgresql:42.6.0'
-	runtimeOnly 'org.postgresql:r2dbc-postgresql:1.0.2.RELEASE'
+	// OTHER
+	implementation group: 'net.imagej', name: 'ij', version: '1.54g'
 }

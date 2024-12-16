@@ -1,4 +1,4 @@
-package discord.bot.omegaloli.command;
+package jda.bot.defect.command;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
