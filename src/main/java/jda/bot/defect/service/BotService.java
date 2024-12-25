@@ -23,15 +23,15 @@ import java.util.List;
 public class BotService {
 
     private JDA jda;
-    private final BotConfig config;
     private final Banner banner;
+    private final BotConfig config;
 
     public void startBot() {
 
         jda = JDABuilder.createDefault(config.getToken())
                 .enableCache(CacheFlag.VOICE_STATE)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS)
-                .setActivity(Activity.customStatus("bruh"))
+                .setActivity(Activity.watching("за сервером"))
                 .build();
     }
 

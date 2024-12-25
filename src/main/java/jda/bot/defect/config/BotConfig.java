@@ -15,4 +15,7 @@ public class BotConfig {
 
     @Value("${bot.server}")
     private String serverId;
+
+    @Value("${file.path.dev}")
+    private String filePath;
 }

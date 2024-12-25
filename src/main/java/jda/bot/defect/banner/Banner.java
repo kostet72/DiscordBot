@@ -21,7 +21,7 @@ public class Banner {
 
     public void updateStats(Guild guild) throws IOException {
 
-        BufferedImage banner = ImageIO.read(new File("src/main/resources/Banner_original.png"));
+        BufferedImage banner = ImageIO.read(new File(config.getFilePath() + "Banner_original.png"));
         Graphics2D g = banner.createGraphics();
 
         Integer count = 0;
@@ -31,17 +31,17 @@ public class Banner {
             }
         }
 
-        int x1 = 845;
-        int x2 = 845;
+        int x = 845;
         int y1 = 1240;
         int y2 = 1940;
         g.setFont(new Font("Gilroy", Font.PLAIN, 300));
         g.setColor(Color.decode("#223F9E"));
-        g.drawString(String.valueOf(count), x1, y1);
-        g.drawString(String.valueOf(guild.getMemberCount()), x2, y2);
+        g.drawString(String.valueOf(count), x, y1);
+        g.drawString(String.valueOf(guild.getMemberCount()), x, y2);
 
-        File newBanner = new File("src/main/resources/Banner.png");
+        File newBanner = new File(config.getFilePath() + "Banner.png");
         ImageIO.write(banner, "png", newBanner);
+        System.out.println("Статистика обновлена");
     }
 
     public void updateBanner(JDA jda) throws IOException {
@@ -50,9 +50,10 @@ public class Banner {
         if (guild != null) {
 
             updateStats(guild);
-            Icon bannerIcon = Icon.from(new File("src/main/resources/Banner.png"));
+            Icon bannerIcon = Icon.from(new File(config.getFilePath() + "Banner.png"));
 
             guild.getManager().setBanner(bannerIcon).queue();
+            System.out.println("Баннер обновлён");
         }
     }
 }

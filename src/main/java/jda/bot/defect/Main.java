@@ -1,5 +1,7 @@
 package jda.bot.defect;
 
+import jda.bot.defect.command.embed.EmbedCommand;
+import jda.bot.defect.listener.ModalListener;
 import jda.bot.defect.service.BotService;
 
 import org.springframework.boot.*;
@@ -26,7 +28,10 @@ public class Main implements CommandLineRunner {
 
 		bot.registerListeners(
 
+				new ModalListener(),
+
 				bot.registerCommands(List.of(
+						new EmbedCommand()
 				))
 		);
 	}
